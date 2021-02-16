@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F.A.R.T Clock Out</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <script defer src="{{ url_for('static', filename='dist/face-api.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='dist/script_out.js') }}"></script>
+    <script src="{{ url_for('static', filename='dist/jquery-3.5.1.min.js') }}"></script>
+</head>
+<body>
+    <div class="header-container">
+        <div class="header">
+            <img src="{{ url_for('static', filename='img/logo-binus.png') }}" alt="logo-binus">
+            <p>Facial Attendance Recognition Tech</p>
+        </div>
+        <div class="navbar">
+            <p>DEMO</p>
+        </div>
+    </div>
+    
+    <div class="contents-background">
+        <div class="contents-container">
+            <div class="windows-container">
+                <div class="video-window-container">
+                    <video id="video" width="500px" height="500px" autoplay muted></video>
+                    <canvas id="canvas"></canvas>
+                </div>
+                <div class="text-window-container">
+                    <div class="text-message-container">
+                        <div class="text-message-box">
+                            <div class="text-message-header">
+                                <p>Messages</p>
+                            </div>
+                            <div class="text-message-contents">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-participants-container">
+                        <div class="text-participants-header">
+                            <p>Attendance List</p>
+                        </div>
+                        <div class="text-participants-contents">
+                            <ul class="subparticipants-contents">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script defer src="{{ url_for('static', filename='dist/get_data.js') }}"></script>
+    <script>
+        
+        var alldata
+        $(document).ready(function(){
+            let request = $.ajax({
+                url:"/get_attendance_out",
+                dataType: "json",
+                contentType: "application/json"
+            })
+            
+            let data_ip
+            
+            request.done(function(response, textStatus, jqXHR){
+                alldata = response
+                let text_html = ""
+                alldata.forEach(function(data,index){
+                    let temp = "<li>" + data['name'] + " | " + data['time'] + "</li>"
+                    text_html += "Clock Out :" + temp
+                    if(data_ip == data['ip']) 
+                        checked = true
+                })
+                if( text_html != "" || text_html.length > 0 ){
+                    // rename field attendance
+                    $(".subparticipants-contents").html(text_html)
+
+                    // window.location.href = "sign_in_data"
+                }
+                
+            })
+        })
+    </script>
+</body>
+</html>

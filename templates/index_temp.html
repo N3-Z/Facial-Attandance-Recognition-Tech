@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="{{ url_for('static', filename='dist/face-api.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='dist/jquery-3.5.1.min.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='dist/script.js') }}"></script>
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas{
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Hello Face Detection</h1>
+    <video id="video" width="1024" height="560" autoplay muted></video>
+    <canvas id="canvas"></canvas>
+    
+
+    <button onclick="bum()">click</button>
+    
+    <script>
+        function bum(){
+            let request = $.ajax({
+                type:"POST",
+                url:"/face_match",
+                data: JSON.stringify({"data":"testing"}),
+                dataType: "json",
+                contentType: "application/json"
+            })
+
+            request.done(function(response, textStatus, jqXHR){
+                console.log("=======")
+                console.log(response)
+                console.log(textStatus)
+                console.log(jqXHR)
+            })
+            
+        }
+
+    </script>
+
+</body>
+</html>

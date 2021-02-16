@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<title>Home Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<body>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white" style="background-image: url('/static/img/bg.png');">
+  <div class="w3-display-topleft w3-padding-large w3-xlarge">
+    <img src="{{url_for('static', filename='img/logo-binus.png')}}" style="width: 5%; height: 5%;">
+  </div>
+  <div class="w3-display-middle">
+      <a href="clock_in" style="color: #20639B;">
+          <h1 class="w3-jumbo w3-animate-top">Clock In</h1>
+      </a>
+    <hr class="w3-border-grey" style="margin:auto;">
+    <a href="clock_out" style="color: #20639B;">
+        <h1 class="w3-jumbo w3-animate-top">Clock Out</h1>
+    </a>
+  </div>
+  <div class="w3-display-bottomleft w3-padding-large">
+    Powered by Software Laboratory Centre &copy;
+  </div>
+</div>
+
+</body>
+</html>
